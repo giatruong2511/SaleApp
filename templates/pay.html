@@ -1,0 +1,56 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}THANH TOÁN{% endblock %}
+
+{% block content %}
+<section class="section pay">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-12 col-md-12 ">
+				<div class="appoinment-wrap mt-5 mt-lg-0">
+					<h2 class="mb-2 title-color">THANH TOÁN HÓA ĐƠN</h2>
+                    <br>
+                    <form>
+                        <h5>Chọn phiếu khám</h5>
+                        <div class="form-group">
+                            <select class="form-control" id="PK" name="pk">
+                                <option>Chọn Phiếu Khám</option>
+                                {% for s in mc %}
+                                <option>{{s.id}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <a href="#priceK"><button class="btn btn-danger" type="submit">xuất</button></a>
+                    </form>
+                    <br><br>
+                    {% if pk_id %}
+                    <form id="#" class="appoinment-form" method="post" action="#">
+                        <h5>Tên bệnh nhân</h5>
+                        <div class="form-group">
+                            <input name="name" id="name" class="form-control" placeholder="{{pk[0].name}}" value="{{pk[0].name}}">
+                        </div>
+                        <h5>Ngày khám</h5>
+                        <div class="form-group">
+                            <input name="name" id="h_date" class="form-control" placeholder="{{pk[0].healthcheck_date}}" value="{{pk[0].healthcheck_date.strftime('%d-%m-%Y')}}">
+                        </div>
+                        <h5>Tiền khám</h5>
+                        <div class="form-group">
+                            <input name="priceK" id="priceK" class="form-control" placeholder="{{ '{:,.1f}'.format(tienkham.value) }}" value="{{tienkham.value}}">
+                        </div>
+                        <h5>Tiền thuốc</h5>
+                        <div class="form-group">
+                            <input name="priceT" id="priceT" class="form-control" placeholder="{{ '{:,.1f}'.format(sum)}}" value="{{ '{:,.1f}'.format(sum)}}">
+                        </div>
+                        <h5>Tổng tiền</h5>
+                        <div class="form-group">
+                            <input type="number" name="price" id="price" class="form-control" placeholder="{{ tienkham.value + sum}}" value="{{ tienkham.value + sum}}">
+                        </div>
+                        <button class="btn btn-danger" type="submit" >Lưu</button>
+                    </form>
+                    {% endif %}
+                </div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Chủ{% endblock %}
+
+{% block content %}
+<section class="banner">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-xl-7">
+				<div class="block">
+					<div class="divider mb-3"></div>
+					<span class="text-uppercase text-sm letter-spacing ">DH19IT03</span>
+					<h1 class="mb-3 mt-3">Phòng Khám Tư</h1>
+					<div class="btn-container ">
+						<a href="{{ url_for('medical_register') }}" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Đặt Lịch Khám <i class="icofont-simple-right ml-2  "></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="feature-block d-lg-flex">
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-surgeon-alt"></i>
+						</div>
+						<span>Dịch Vụ 24/7</span>
+						<h4 class="mb-3">Đăng Ký Khám Trực Tuyến</h4>
+						<p class="mb-4">Hãy đăng ký. Chúng tôi sẽ sắp xếp lịch khám bệnh cho bạn</p>
+						<a href="{{ url_for('medical_register') }}" class="btn btn-main btn-round-full">Đăng Ký Khám</a>
+					</div>
+
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-ui-clock"></i>
+						</div>
+						<span>Thời gian hoạt động</span>
+						<h4 class="mb-3">Giờ Làm Việc</h4>
+						<ul class="w-hours list-unstyled">
+		                    <li class="d-flex justify-content-between">Thứ 2 - Thứ 6 : <span>7:00 - 20:00</span></li>
+		                    <li class="d-flex justify-content-between">Thứ 7 - Chủ Nhật : <span>7:00 - 14:00</span></li>
+		                </ul>
+					</div>
+
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-support"></i>
+						</div>
+						<span>Trường hợp khẩn cấp</span>
+						<h4 class="mb-3">0909 999 090</h4>
+						<p>Gọi ngay khi bạn cần hỗ trợ khẩn cấp</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section about">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 col-sm-12">
+				<div class="about-img mt-4 mt-lg-0">
+					<img width="100%" src="static/images/about/11.jpg" alt="aa" class="img-fluid">
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="about-content pl-4 mt-4 mt-lg-0">
+					<h2 class="title-color">Dịch vụ <br> chuyên nghiệp</h2>
+					<p class="mt-4 mb-5">Chúng tôi cung cấp các dịch vụ y tế tốt nhất với phương châm “tất cả vì bệnh nhân”.Đội ngũ bác sĩ của Phòng khám luôn nỗ lực với tinh thần trách nhiệm cao nhất để mang lại cho bệnh nhân dịch vụ khám chữa bệnh chất lượng cao với chi phí hợp lý.</p>
+
+					<a href="#" class="btn btn-main-2 btn-round-full btn-icon">Dịch vụ<i class="icofont-simple-right ml-3"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--<section class="section register">-->
+<!--	<div class="container">-->
+<!--		<div class="row align-items-center">-->
+<!--			<div class="col-lg-12 col-md-12 ">-->
+<!--				<div class="appoinment-wrap mt-5 mt-lg-0">-->
+<!--					<h2 class="mb-2 title-color">Đặt Lịch Khám</h2>-->
+<!--					<p class="mb-4">Vui lòng điền đầy đủ thông tin để đăng ký khám bệnh</p>-->
+<!--					<form id="#" class="appoinment-form" method="post" action="#">-->
+<!--						<div>-->
+<!--							<div class="form-group">-->
+<!--                                <input name="name" id="name" type="text" class="form-control" placeholder="Họ tên">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--						<div>-->
+<!--							<div class="form-group">-->
+<!--                                <input name="birth" id="birth" type="text" class="form-control" placeholder="Năm sinh">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                         <div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input name="phone" id="phone" type="text" class="form-control" placeholder="Số điện thoại">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input name="address" id="address" type="text" class="form-control" placeholder="Địa chỉ">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--						<div class="form-group">-->
+<!--								<input name="registerdate" id="registerdate" type="date" class="form-control">-->
+<!--						</div>-->
+<!--						<a class="btn btn-main btn-round-full" href="{{ url_for('medical_register') }}" >Đăng Ký <i class="icofont-simple-right ml-2  "></i></a>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</section>-->
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'admin/base.html' %}
+
+{% block body %}
+<h1 class="text-info text-center">Tần suất sử dụng thuốc</h1>
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <table class="table">
+            <tr>
+                <th>Tên Thuốc</th>
+                <th>Đơn Vị Tính</th>
+                <th>Số Lượng</th>
+                <th>Số Lần Dùng</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td> {{ s[0] }} </td>
+                <td> {{ s[1] }} </td>
+                <td> {{ s[2] }} </td>
+                <td> {{ s[3] }}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <canvas id="myCateChart"></canvas>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let labels = []
+    let data = []
+    let colors = []
+    let borderColors = []
+    let r, g, b;
+
+    {% for s in stats %}
+    labels.push('{{s[1]}}')
+    data.push({{ s[2] }})
+
+    r = parseInt(Math.random() * 255)
+    g = parseInt(Math.random() * 255)
+    b = parseInt(Math.random() * 255)
+    colors.push(`rgba(${r}, ${g}, ${b}, 0.8)`)
+    borderColors.push(`rgba(${r}, ${g}, ${b}, 1)`)
+    {% endfor %}
+
+    window.onload = function() {
+        const ctx = document.getElementById('myCateChart').getContext('2d')
+
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Thong ke so san pham theo danh muc',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: borderColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang Chủ{% endblock %}
+
+{% block content %}
+
+{% if err_msg %}
+<div class="alert alert-danger">
+    <h3>{{err_msg}}</h3>
+</div>
+{% endif%}
+
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white">Đăng ký khám</span>
+          <h1 class="text-capitalize mb-5 text-lg">Đặt lịch hẹn</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section appoinment">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-12 col-md-12 ">
+				<div class="appoinment-wrap mt-5 mt-lg-0">
+					<h2 class="mb-2 title-color">Đặt Lịch Khám</h2>
+					<p class="mb-4">Vui lòng điền đầy đủ thông tin để đăng ký khám bệnh</p>
+					<form method="post" action="{{ url_for('medical_register')}}">
+                        <h6>Thông tin bệnh nhân</h6>
+                        <div>
+                            <div class="form-group">
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Họ tên" required>
+                            </div>
+                        </div>
+
+                        <div >
+                            <div class="form-group">
+                                <input name="birth" id="birth" type="text" class="form-control" placeholder="Năm sinh" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="PK" name="gt" required>
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select>
+                        </div>
+                         <div>
+                            <div class="form-group">
+                                <input name="phone" id="phone" type="text" class="form-control" placeholder="Số điện thoại" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <input name="address" id="address" type="text" class="form-control" placeholder="Địa chỉ" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group">
+                                <input name="c_id" id="c_id" type="text" class="form-control" placeholder="CCND/CCCD" required>
+                            </div>
+                        </div>
+                        <br>
+                        <h6>Chọn ngày khám</h6>
+                        <div class="form-group">
+                            <input name="registerdate" id="registerdate" type="date" class="form-control" required>
+                        </div>
+                        {% if current_user.is_authenticated %}
+                        <input type="submit" value="Lưu" class="btn btn-danger">
+                        <br><br>
+                        {% else %}
+                        <a class="text-danger" href="{{ url_for('user_signin', next='medical_register') }}">Vui lòng đăng nhập để đăng ký...</a>
+                        <br><br>
+                        {% endif %}
+
+                    </form>
+            </div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

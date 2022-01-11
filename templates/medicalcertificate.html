@@ -1,0 +1,46 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}PHIẾU KHÁM{% endblock %}
+
+{% block content %}
+<div class="col-lg-12 col-md-12 ">
+				<div class="appoinment-wrap mt-5 mt-lg-0">
+					<h2 class="mb-2 title-color">LẬP PHIẾU KHÁM</h2>
+                    <form id="#" class="appoinment-form" method="post" action="#">
+                        <div class="form-group">
+                            <input name="name" id="name" class="form-control" placeholder="Họ Tên">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" id="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input name="tt" id="TT" class="form-control" placeholder="Triệu chứng">
+                        </div>
+                        <div class="form-group">
+                            <input name="dd" id="DD" class="form-control" placeholder="Dự Đoán Bệnh">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="PK">
+                                <option>Chọn Phiếu Khám</option>
+                                { for  s in...}
+                                <option>Phiếu Khám 1</option>
+                                <option>Phiếu Khám 2</option>
+                                <option>Phiếu Khám 3</option>
+                                {endfor}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input name="name" id="priceK" class="form-control" placeholder="Tiền khám">
+                        </div>
+                        <div class="form-group">
+                            <input name="name" id="priceT" class="form-control" placeholder="Tiền thuốc">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="price" id="price" class="form-control" placeholder="Số tiền thanh toán">
+                        </div>
+
+                    <a class="btn btn-main btn-round-full" href="#">THANH TOÁN<i class="icofont-simple-right ml-2  "></i></a>
+                </form>
+            </div>
+			</div>
+{% endblock %}

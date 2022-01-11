@@ -1,0 +1,87 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}DANH SÁCH KHÁM{% endblock %}
+
+{% block content %}
+<section class="section appoinment">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-12 col-md-10 ">
+				<div class="appoinment-wrap mt-5 mt-lg-0">
+					<h2 class="mb-2 title-color">LẬP DANH SÁCH KHÁM</h2>
+                    <h6>Chọn ngày khám</h6>
+                    <form class="form">
+                        <div class="form-group">
+                            <input type="date" name="date" placeholder="Chọn ngày khám" class="form-control">
+                            <button class="btn btn-success" type="submit" style="padding: 5px; margin: 15px 0px">Tìm kiếm</button>
+                        </div>
+                    </form>
+                    {% if kw %}
+					<form id="#" class="appoinment-form" method="post" action="#">
+						<table class="table text-center">
+                            <h5 class="text-center">Danh sách bệnh nhân đăng ký ngày {{kw}}</h5>
+                            <tr>
+                                <th>Mã BN</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>Năm sinh</th>
+                                <th>Địa chỉ</th>
+                                <th>Ngày Khám</th>
+                                <th></th>
+                            </tr>
+                            {% for p in Medicalregister %}
+                            <tr>
+                                <td>{{p[0]}}</td>
+                                <td>{{p[1]}}</td>
+                                <td>{{p[3]}}</td>
+                                <td>{{p[2]}}</td>
+                                <td>{{p[4]}}</td>
+                                <td>{{p[5].strftime("%d-%m-%Y")}}</td>
+                                <td><a href="#" class="btn btn-primary" onclick="addToNote(id = {{p[0]}}, name = '{{p[1]}}',gioitinh = '{{p[3]}}', yearofbirth = {{p[2]}}, address = '{{p[4]}}', ngay = '{{p[5]}}') ">Thêm</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </form>
+                    {% endif %}
+
+                    <div>
+                        {% if 'note' in session and session['note'] %}
+                        <table class="table" border="1">
+                            <tr>
+                                <th colspan="6" class="text-center">Danh sách khám</th>
+                            </tr>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>Năm sinh</th>
+                                <th>Địa chỉ</th>
+                                <th></th>
+                            </tr>
+                            {% for c in session['note'].values() %}
+                            <tr id="p{{ c.id }}">
+                                <td>{{ c.id }}</td>
+                                <td>{{ c.name }}</td>
+                                <td>{{ c.gioitinh }}</td>
+                                <td>{{ c.yearofbirth }}</td>
+                                <td>{{ c.address }}</td>
+                                 <td style="width: 30px">
+                                    <input type="button"
+                                           onclick="deleteNote({{ c.id }})"
+                                           value="Xoa"
+                                           class="btn btn-danger"/>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <input type="button" value="Lưu" class="btn btn-danger" onclick="save()" />
+                        {% else %}
+                            <p><i>Khong co bệnh nhân nào trong danh sách!!!</i></p>
+                        {% endif %}
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

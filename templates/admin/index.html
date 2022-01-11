@@ -1,0 +1,202 @@
+{% extends 'admin/base.html' %}
+
+{% block body %}
+{% if current_user.is_authenticated %}
+<h1 class="text-info text-center">Tần suất sử dụng thuốc</h1>
+<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <table class="table">
+            <tr>
+                <th>Tên Thuốc</th>
+                <th>Đơn Vị Tính</th>
+                <th>Số Lượng</th>
+                <th>Số Lần Dùng</th>
+            </tr>
+            {% for s in stats %}
+            <tr>
+                <td> {{ s[0] }} </td>
+                <td> {{ s[1] }} </td>
+                <td> {{ s[2] }} </td>
+                <td> {{ s[3] }}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    <div class="col-md-4 col-xs-12">
+         <form >
+                <div class="form-group text-danger">
+                    Tìm kiếm theo tên thuốc
+                    <input type="text" class="form-control" name="kwtt" placeholder="Nhập tên thuốc..." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm kiếm theo đơn vị thuốc
+                    <input type="text" class="form-control" name="kwdv" placeholder="Nhập đơn vị...." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm kiếm theo số lần dùng
+                    <input type="number" class="form-control" name="kwsld" placeholder="Nhập số lần dùng...." />
+                </div>
+                <input type="submit" value="Tìm kiếm" class="btn btn-success" />
+            </form>
+    </div>
+</div>
+<br>
+<h1 class="text-info text-center">Y tá Lập danh sách khám</h1>
+<br>
+<div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <table class="table">
+                <tr>
+                    <th>Mã DS</th>
+                    <th>Mã y tá </th>
+                    <th>Mã Bệnh Nhân </th>
+                    <th>Tên Bệnh Nhân</th>
+                    <th>Ngày Khám</th>
+                </tr>
+                {% for p in mclist %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[3] }}</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[2] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <form >
+                <div class="form-group text-danger">
+                    Tìm kiếm theo mã danh sách
+                    <input type="number" class="form-control" name="kwds" placeholder="Nhap ma danh sach..." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm kiếm theo mã y tá
+                    <input type="number" class="form-control" name="kwyt" placeholder="Nhập mã y ta...." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm kiếm theo mã bệnh nhân
+                    <input type="text" class="form-control" name="kwbn" placeholder="Nhập mã bệnh nhân...." />
+                </div>
+                <div class="form-group">
+                    <p class="text-danger">Tìm theo ngày</p>
+                    Ngày bắt đầu
+                    <input type="date" class="form-control" name="from_date" placeholder="Chọn ngày bắt đầu"/>
+                    Ngày kết thúc
+                    <input type="date" class="form-control" name="to_date" />
+                </div>
+                <input type="submit" value="Tìm kiếm" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<h1 class="text-info text-center">Danh sách bệnh nhân</h1>
+<br>
+<div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <table class="table" border="1" width="100%">
+                <tr>
+                    <th>Mã bệnh nhân</th>
+                    <th>Tên bệnh nhân </th>
+                    <th>Ngày sinh</th>
+                    <th>Số lần khám</th>
+                </tr>
+                {% for p in patient %}
+                <tr>
+                    <td>{{ p[0] }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[2] }}</td>
+                    <td>{{ p[3] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="col-md-4 col-xs-12">
+            <form>
+                <div class="form-group text-danger">
+                    Tìm theo tên
+                    <input type="text" class="form-control" name="kwname" placeholder="Nhập tên bệnh nhân..." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm theo năm sinh
+                    <input type="number" class="form-control" name="kwy" placeholder="Nhập năm sinh...." />
+                </div>
+                <div class="form-group text-danger">
+                    Tìm theo số lần khám
+                    <input type="number" class="form-control" name="kwslk" placeholder="Nhập số lần khám...." />
+                </div>
+                <input type="submit" value="Tìm kiếm" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let labels = []
+    let data = []
+    let colors = []
+    let borderColors = []
+    let r, g, b;
+
+    {% for s in stats %}
+    labels.push('{{s[1]}}')
+    data.push({{ s[2] }})
+
+    r = parseInt(Math.random() * 255)
+    g = parseInt(Math.random() * 255)
+    b = parseInt(Math.random() * 255)
+    colors.push(`rgba(${r}, ${g}, ${b}, 0.8)`)
+    borderColors.push(`rgba(${r}, ${g}, ${b}, 1)`)
+    {% endfor %}
+
+    window.onload = function() {
+        const ctx = document.getElementById('myCateChart').getContext('2d')
+
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Thong ke so san pham theo danh muc',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: borderColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% else %}
+<h1 class="text-center text-danger">DANG NHAP QUAN TRI</h1>
+<form method="post" action="{{ url_for('signin_admin') }}">
+    <div class="form-group">
+       <label for="username">Username</label>
+       <input type="text" name="username" class="form-control"
+              id="username" placeholder="Nhap username..." required />
+   </div>
+    <div class="form-group">
+       <label for="password">Mat khau</label>
+       <input type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              placeholder="Nhap mat khau..." required />
+   </div>
+    <input type="submit" value="Dang nhap" class="btn btn-danger" />
+</form>
+
+{% endif %}
+{% endblock %}
